@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Snow | Certificates</title>
+  <link rel="Website Icon" type="png" href="images/logo.png">
+
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: "#0ea5e9",
+              600: "#0284c7"
+            }
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- FontAwesome & Devicon for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  
+  <style>
+    /* Responsive Glassmorphism */
+    .glass-panel {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-card {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.3);
+    }
+    
+    /* Hide specific theme icons */
+    html.dark #theme-toggle-dark-icon { display: none; }
+    html.dark #theme-toggle-light-icon { display: block; }
+    html:not(.dark) #theme-toggle-light-icon { display: none; }
+    html:not(.dark) #theme-toggle-dark-icon { display: block; }
+
+    /* Custom Scrollbar for Modal */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    html.dark ::-webkit-scrollbar-thumb { background: #334155; }
+  </style>
+
+  <script src="JS/theme-init.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+  <!-- 3D Background Canvas -->
+  <canvas id="bg-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+  <header class="fixed top-0 w-full z-40 glass-panel bg-white/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800/50 transition-colors duration-300">
+    <nav class="mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 text-lg font-bold group">
+          <div class="h-10 w-10 rounded-full bg-gradient-to-tr from-brand-600 to-brand-500 flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+            <img src="Images/logo.png" class="w-10 h-10 ring-2 rounded-full object-cover" alt="Black Snow Logo">
+          </div>
+          <span class="tracking-wide text-slate-900 dark:text-white">Black Snow</span>
+        </a>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div class="hidden md:flex items-center gap-6">
+            <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-500 transition-colors" href="about.html">About</a>
+            <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-500 transition-colors" href="projects.html">Projects</a>
+            <a class="text-sm font-bold text-brand-500 dark:text-brand-400 transition-colors" href="certificates.html">Certificates</a>
+            <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-500 transition-colors" href="contact.html">Contact</a>
+          </div>
+
+          <button id="theme-toggle" type="button" class="p-2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors" aria-label="Toggle theme">
+            <svg id="theme-toggle-dark-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.32a1 1 0 011.415 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM14.22 17.28a1 1 0 010-1.415l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4.22-1.32a1 1 0 01-1.415 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm1.32-4.22a1 1 0 010 1.415l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM10 5a5 5 0 100 10 5 5 0 000-10z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+
+          <button id="nav-toggle" type="button" class="md:hidden p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i id="nav-icon-bars" class="fa-solid fa-bars text-lg"></i>
+            <i id="nav-icon-close" class="fa-solid fa-xmark text-lg hidden"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden mt-4 border-t border-slate-200 dark:border-slate-700/50 pt-4 pb-2 flex flex-col gap-1">
+        <a class="px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="about.html">About</a>
+        <a class="px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="projects.html">Projects</a>
+        <a class="px-3 py-2.5 rounded-lg text-base font-bold text-brand-500 dark:text-brand-400 bg-brand-500/10" href="certificates.html">Certificates</a>
+        <a class="px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative z-10 mx-auto max-w-6xl px-4 pt-32 pb-16 sm:px-6 lg:px-8 min-h-screen">
+    <section class="animate-fade-in-up text-center max-w-2xl mx-auto mb-16">
+      <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-brand-500/10 text-brand-500 mb-6">
+        <i class="fa-solid fa-award text-3xl"></i>
+      </div>
+      <h1 class="text-4xl font-black md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
+        Certifications
+      </h1>
+      <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">
+        Selected diplomas and completed learning paths validating my technical expertise and creative skills.
+      </p>
+    </section>
+
+    <!-- Certificates Grid -->
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      
+      <!-- Certificate 1: Front End -->
+      <article class="cert-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group" 
+               data-title="Front End Development" 
+               data-desc="Acquired comprehensive skills in building responsive, user-friendly web interfaces using modern front-end technologies and framework components. Certified by SEFUTRE." 
+               data-img="Images/youssef wahed FrontEnd.png" 
+               data-tools='["devicon-html5-plain", "devicon-css3-plain", "devicon-javascript-plain", "devicon-bootstrap-plain", "devicon-react-original"]'>
+        <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-800">
+          <img src="Images/youssef wahed FrontEnd.png" alt="Front End Certificate" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop'" />
+          <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="px-6 py-2 rounded-full bg-brand-500 text-white font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <i class="fa-solid fa-magnifying-glass-plus mr-2"></i> View Certificate
+            </span>
+          </div>
+        </div>
+        <div class="p-6 text-center border-t border-slate-200 dark:border-white/5">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Front End Development</h3>
+          <p class="text-sm text-brand-600 dark:text-brand-400 font-bold mb-2">SEFUTRE</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">HTML, CSS, JS, React, Bootstrap</p>
+        </div>
+      </article>
+
+      <!-- Certificate 2: Back End -->
+      <article class="cert-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group" 
+               data-title="Back End Development" 
+               data-desc="Mastered server-side programming, database management, and building robust RESTful APIs to power dynamic web applications. Certified by SEFUTRE." 
+               data-img="Images/Youssef Waheed BackEnd.png" 
+               data-tools='["devicon-nodejs-plain", "devicon-express-original", "devicon-mongodb-plain"]'>
+        <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-800">
+          <img src="Images/Youssef Waheed BackEnd.png" alt="Back End Certificate" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop'" />
+          <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="px-6 py-2 rounded-full bg-brand-500 text-white font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <i class="fa-solid fa-magnifying-glass-plus mr-2"></i> View Certificate
+            </span>
+          </div>
+        </div>
+        <div class="p-6 text-center border-t border-slate-200 dark:border-white/5">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Back End Development</h3>
+          <p class="text-sm text-brand-600 dark:text-brand-400 font-bold mb-2">SEFUTRE</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Node.js, Express.js, MongoDB</p>
+        </div>
+      </article>
+
+      <!-- Certificate 3: Graphic Design -->
+      <article class="cert-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group" 
+               data-title="Graphic Design" 
+               data-desc="Developed a strong foundation in visual communication, branding, and layout design using industry-standard Adobe Creative Cloud applications. Certified by Creativa NTI BNS." 
+               data-img="Images/Youssef Wahed Hassan Graphic.png" 
+               data-tools='["devicon-figma-plain", "devicon-photoshop-plain", "devicon-illustrator-plain", "fa-solid fa-swatchbook text-[#FF3366]"]'>
+        <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-800">
+          <img src="Images/Youssef Wahed Hassan Graphic.png" alt="Graphic Design Certificate" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop'" />
+          <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="px-6 py-2 rounded-full bg-brand-500 text-white font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <i class="fa-solid fa-magnifying-glass-plus mr-2"></i> View Certificate
+            </span>
+          </div>
+        </div>
+        <div class="p-6 text-center border-t border-slate-200 dark:border-white/5">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Graphic Design</h3>
+          <p class="text-sm text-brand-600 dark:text-brand-400 font-bold mb-2">Creativa NTI BNS</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Photoshop, Illustrator, InDesign</p>
+        </div>
+      </article>
+
+      <!-- Certificate 4: Mobile Application -->
+      <article class="cert-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group" 
+               data-title="Mobile Application Development" 
+               data-desc="Learned to build high-performance, cross-platform mobile applications for both iOS and Android from a single codebase. Certified by HTI." 
+               data-img="Images/Flutter.jpg" 
+               data-tools='["devicon-flutter-plain", "devicon-dart-plain"]'>
+        <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-800">
+          <img src="Images/Flutter.jpg" alt="Mobile App Certificate" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop'" />
+          <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="px-6 py-2 rounded-full bg-brand-500 text-white font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <i class="fa-solid fa-magnifying-glass-plus mr-2"></i> View Certificate
+            </span>
+          </div>
+        </div>
+        <div class="p-6 text-center border-t border-slate-200 dark:border-white/5">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Mobile Application</h3>
+          <p class="text-sm text-brand-600 dark:text-brand-400 font-bold mb-2">HTI</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Flutter, Dart</p>
+        </div>
+      </article>
+
+      <!-- Certificate 5: UI/UX -->
+      <article class="cert-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group" 
+               data-title="UI/UX Design" 
+               data-desc="Focused on user-centered design principles, wireframing, and interactive prototyping to craft seamless and intuitive digital experiences. Certified by HTI." 
+               data-img="Images/UIUX.jpg" 
+               data-tools='["devicon-figma-plain"]'>
+        <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-800">
+          <img src="Images/UIUX.jpg" alt="UI/UX Certificate" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1561070791-36c11767b26a?q=80&w=800&auto=format&fit=crop'" />
+          <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="px-6 py-2 rounded-full bg-brand-500 text-white font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <i class="fa-solid fa-magnifying-glass-plus mr-2"></i> View Certificate
+            </span>
+          </div>
+        </div>
+        <div class="p-6 text-center border-t border-slate-200 dark:border-white/5">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">UI/UX Design</h3>
+          <p class="text-sm text-brand-600 dark:text-brand-400 font-bold mb-2">HTI</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Figma, Prototyping</p>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Side-by-Side Modal / Pop-up -->
+  <div id="cert-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <!-- Modal Backdrop -->
+    <div id="modal-backdrop" class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
+    
+    <!-- Modal Content -->
+    <div id="modal-content" class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-panel bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-white/10 rounded-3xl shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col md:flex-row">
+      
+      <!-- Close Button -->
+      <button id="close-modal" class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-200/50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-red-500 hover:text-white transition-colors">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <!-- Left Column: Image -->
+      <div class="md:w-1/2 h-64 md:h-auto border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+        <img id="modal-img" src="" alt="Certificate" class="max-w-full max-h-full object-contain rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none p-4" />
+      </div>
+
+      <!-- Right Column: Info & Languages/Tools -->
+      <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
+        <div class="flex items-center gap-2 text-brand-500 font-bold text-sm uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-award"></i> Official Certificate
+        </div>
+        <h2 id="modal-title" class="text-3xl font-black text-slate-900 dark:text-white mb-4 leading-tight"></h2>
+        <p id="modal-desc" class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8"></p>
+        
+        <div class="bg-slate-100 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-200 dark:border-white/5">
+          <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider text-center">Languages & Tools Mastered</h4>
+          <div id="modal-tools" class="flex flex-wrap justify-center gap-6 text-5xl">
+            <!-- Tech icons injected via JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="JS/theme.js"></script>
+  <script src="JS/navbar.js"></script>
+  <script src="JS/particles.js"></script>
+  <script src="JS/certificates.js"></script>
+</body>
+</html>

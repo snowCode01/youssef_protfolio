@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Snow | Projects</title>
+  <link rel="Website Icon" type="png" href="images/logo.png">
+
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: "#0ea5e9",
+              600: "#0284c7"
+            }
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- FontAwesome & Devicon for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  
+  <style>
+    /* Responsive Glassmorphism */
+    .glass-panel {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-card {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.3);
+    }
+    
+    /* Hide specific theme icons */
+    html.dark #theme-toggle-dark-icon { display: none; }
+    html.dark #theme-toggle-light-icon { display: block; }
+    html:not(.dark) #theme-toggle-light-icon { display: none; }
+    html:not(.dark) #theme-toggle-dark-icon { display: block; }
+
+    /* Custom Scrollbar for Modal */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    html.dark ::-webkit-scrollbar-thumb { background: #334155; }
+  </style>
+
+  <script src="JS/theme-init.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+  <!-- 3D Background Canvas -->
+  <canvas id="bg-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+  <header class="fixed top-0 w-full z-40 glass-panel bg-white/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800/50 transition-colors duration-300">
+    <nav class="mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 text-lg font-bold group">
+          <div class="h-10 w-10 rounded-full bg-gradient-to-tr from-brand-600 to-brand-500 flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+            <img src="Images/logo.png" class="w-10 h-10 ring-2 rounded-full object-cover" alt="Black Snow Logo">
+          </div>
+          <span class="tracking-wide text-slate-900 dark:text-white">Black Snow</span>
+        </a>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div class="hidden md:flex items-center gap-6">
+            <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-500 transition-colors" href="about.html">About</a>
+            <a class="text-sm font-bold text-brand-500 dark:text-brand-400 transition-colors" href="projects.html">Projects</a>
+            <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-500 transition-colors" href="certificates.html">Certificates</a>
+            <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-500 transition-colors" href="contact.html">Contact</a>
+          </div>
+
+          <button id="theme-toggle" type="button" class="p-2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors" aria-label="Toggle theme">
+            <svg id="theme-toggle-dark-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.32a1 1 0 011.415 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM14.22 17.28a1 1 0 010-1.415l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4.22-1.32a1 1 0 01-1.415 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm1.32-4.22a1 1 0 010 1.415l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM10 5a5 5 0 100 10 5 5 0 000-10z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+
+          <button id="nav-toggle" type="button" class="md:hidden p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i id="nav-icon-bars" class="fa-solid fa-bars text-lg"></i>
+            <i id="nav-icon-close" class="fa-solid fa-xmark text-lg hidden"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden mt-4 border-t border-slate-200 dark:border-slate-700/50 pt-4 pb-2 flex flex-col gap-1">
+        <a class="px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="about.html">About</a>
+        <a class="px-3 py-2.5 rounded-lg text-base font-bold text-brand-500 dark:text-brand-400 bg-brand-500/10" href="projects.html">Projects</a>
+        <a class="px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="certificates.html">Certificates</a>
+        <a class="px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative z-10 mx-auto max-w-6xl px-4 pt-32 pb-16 sm:px-6 lg:px-8 min-h-screen">
+    <section class="animate-fade-in-up text-center max-w-2xl mx-auto mb-12">
+      <h1 class="text-4xl font-black md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
+        My Projects
+      </h1>
+      <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">
+        A selection of my recent work across full-stack development and creative design.
+      </p>
+
+      <!-- Custom Tabs -->
+      <div class="mt-8 inline-flex rounded-xl bg-slate-200/50 dark:bg-slate-800/50 p-1 glass-panel">
+        <button id="tab-prog" class="tab-btn active px-6 py-2.5 rounded-lg text-sm font-bold transition-all bg-white dark:bg-brand-500 text-brand-600 dark:text-white shadow-sm" data-target="programming">
+          <i class="fa-solid fa-code mr-2"></i> Programming
+        </button>
+        <button id="tab-graph" class="tab-btn px-6 py-2.5 rounded-lg text-sm font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-brand-500" data-target="graphics">
+          <i class="fa-solid fa-pen-nib mr-2"></i> Graphics
+        </button>
+      </div>
+    </section>
+
+    <!-- Programming Projects Grid -->
+    <div id="programming" class="tab-content grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      
+      <!-- Project Card 1: Sugar Wise World -->
+      <article class="project-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group" 
+               data-title="Sugar Wise World" 
+               data-desc="A comprehensive health-tech platform designed for diabetes management support. It includes a robust web dashboard and a cross-platform mobile application for real-time monitoring." 
+               data-img="Images/sugarWise.png" 
+               data-tech='["devicon-mongodb-plain", "devicon-express-original", "devicon-react-original", "devicon-nodejs-plain", "devicon-flutter-plain"]'>
+        <div class="relative h-48 overflow-hidden">
+          <img src="Images/sugarWise.png" alt="Sugar Wise World" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <span class="text-white text-sm font-semibold"><i class="fa-solid fa-eye mr-2"></i>View Details</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Sugar Wise World</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Health-tech platform & mobile app for diabetes management support.</p>
+        </div>
+      </article>
+
+      <!-- Project Card 2: Tech E-Commerce -->
+      <article class="project-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group"
+               data-title="Tech Devices E-Commerce" 
+               data-desc="A fully functional digital storefront selling laptops, mobile phones, and accessories. Features include a complex UI tree structure, shopping cart, and secure checkout flow." 
+               data-img="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=800&auto=format&fit=crop" 
+               data-tech='["devicon-react-original", "devicon-tailwindcss-original", "devicon-nodejs-plain", "devicon-mongodb-plain"]'>
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=800&auto=format&fit=crop" alt="E-Commerce Platform" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+            <span class="text-white text-sm font-semibold"><i class="fa-solid fa-eye mr-2"></i>View Details</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Tech E-Commerce</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Digital shop architecture for laptops, phones, and tech accessories.</p>
+        </div>
+      </article>
+
+      <!-- Project Card 3: 3D Professional Portfolio -->
+      <article class="project-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group"
+               data-title="3D Professional Portfolio" 
+               data-desc="An interactive, client-based 3D portfolio featuring advanced CSS layouts, custom navigation bars, and embedded Three.js elements for a premium user experience." 
+               data-img="Images/logo.png" 
+               data-tech='["devicon-html5-plain", "devicon-css3-plain", "devicon-javascript-plain"]'>
+        <div class="relative h-48 overflow-hidden">
+          <img src="Images/logo.png" alt="3D Portfolio" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+            <span class="text-white text-sm font-semibold"><i class="fa-solid fa-eye mr-2"></i>View Details</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">3D Web Portfolio</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Client-based interactive portfolio with customized 3D elements and layouts.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Graphics Projects Grid (Hidden initially) -->
+    <div id="graphics" class="tab-content hidden grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      
+      <!-- Graphic Card 1 -->
+      <article class="project-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group"
+               data-title="Startup Brand Identity Kit" 
+               data-desc="A complete visual overhaul for an emerging startup. Deliverables included logo systems, typography selection, custom social media templates, and a comprehensive style guide." 
+               data-img="Images/Artboard 1.png" 
+               data-tech='["devicon-illustrator-plain", "devicon-photoshop-plain", "devicon-figma-plain"]'>
+        <div class="relative h-48 overflow-hidden">
+          <img src="Images/Artboard 1.png" alt="Brand Identity Kit" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+            <span class="text-white text-sm font-semibold"><i class="fa-solid fa-eye mr-2"></i>View Details</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Falkon Store Brand</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Complete branding systems, typography, and social templates.</p>
+        </div>
+      </article>
+
+      <!-- Graphic Card 2 -->
+      <article class="project-card glass-card cursor-pointer bg-white/60 dark:bg-slate-800/40 border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden group"
+               data-title="Campaign Marketing Creatives" 
+               data-desc="Designed high-conversion ad creatives and campaign visuals. The project focused heavily on performance marketing, visual hierarchy, and color psychology to maximize click-through rates." 
+               data-img="Images/Aswan-Poster.png" 
+               data-tech='["devicon-photoshop-plain"]'>
+        <div class="relative h-48 overflow-hidden">
+          <img src="Images/Aswan-Poster.png" alt="Marketing Creatives" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+            <span class="text-white text-sm font-semibold"><i class="fa-solid fa-eye mr-2"></i>View Details</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Kemet Tours Marketing </h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Social Media poster design</p>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Side-by-Side Modal / Pop-up -->
+  <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <!-- Modal Backdrop -->
+    <div id="modal-backdrop" class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
+    
+    <!-- Modal Content -->
+    <div id="modal-content" class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-panel bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-white/10 rounded-3xl shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col md:flex-row">
+      
+      <!-- Close Button -->
+      <button id="close-modal" class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-200/50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-red-500 hover:text-white transition-colors">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <!-- Left Column: Image -->
+      <div class="md:w-1/2 h-64 md:h-auto">
+        <img id="modal-img" src="" alt="" class="w-full h-full object-cover rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none" />
+      </div>
+
+      <!-- Right Column: Info & Tech Stack -->
+      <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
+        <p class="text-brand-500 font-bold text-sm uppercase tracking-wider mb-2">Project Overview</p>
+        <h2 id="modal-title" class="text-3xl font-black text-slate-900 dark:text-white mb-4 leading-tight"></h2>
+        <p id="modal-desc" class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8"></p>
+        
+        <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Technologies Used</h4>
+        <div id="modal-tech" class="flex flex-wrap gap-4 text-4xl">
+          <!-- Tech icons injected via JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="JS/theme.js"></script>
+  <script src="JS/navbar.js"></script>
+  <script src="JS/particles.js"></script>
+  <script src="JS/projects.js"></script>
+</body>
+</html>
