@@ -47,6 +47,8 @@ const mImg = document.getElementById("modal-img");
 const mTitle = document.getElementById("modal-title");
 const mDesc = document.getElementById("modal-desc");
 const mTech = document.getElementById("modal-tech");
+const mLink = document.getElementById("modal-link");
+const mLinkContainer = document.getElementById("modal-link-container");
 
 function closeModal() {
   if (!modal || !modalContent) return;
@@ -65,13 +67,26 @@ document.querySelectorAll(".project-card").forEach((card) => {
     mDesc.textContent = card.getAttribute("data-desc");
     mImg.src = card.getAttribute("data-img");
 
-    const techArray = JSON.parse(card.getAttribute("data-tech"));
+    const url = card.getAttribute("data-url");
+    if (mLink && mLinkContainer) {
+      if (url && url !== "#") {
+        mLink.href = url;
+        mLinkContainer.classList.remove("hidden");
+      } else {
+        mLinkContainer.classList.add("hidden");
+      }
+    }
+
+    const techAttr = card.getAttribute("data-tech");
     mTech.innerHTML = "";
-    techArray.forEach((iconClass) => {
-      const icon = document.createElement("i");
-      icon.className = `${iconClass} colored hover:scale-110 transition-transform cursor-pointer drop-shadow-sm`;
-      mTech.appendChild(icon);
-    });
+    if (techAttr) {
+      const techArray = JSON.parse(techAttr);
+      techArray.forEach((iconClass) => {
+        const icon = document.createElement("i");
+        icon.className = `${iconClass} colored hover:scale-110 transition-transform cursor-pointer drop-shadow-sm`;
+        mTech.appendChild(icon);
+      });
+    }
 
     modal.classList.remove("pointer-events-none");
     modal.classList.replace("opacity-0", "opacity-100");
